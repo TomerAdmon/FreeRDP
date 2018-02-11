@@ -102,7 +102,7 @@ BOOL tls_connect(rdpTls* tls)
 	int connection_status;
 	char *hostname;
 
-	tls->ctx = SSL_CTX_new(TLSv1_client_method());
+	tls->ctx = SSL_CTX_new(SSLv23_client_method());
 
 	if (tls->ctx == NULL)
 	{
