@@ -124,7 +124,7 @@ BOOL tls_connect(rdpTls* tls)
 #ifdef SSL_OP_NO_COMPRESSION
 	options |= SSL_OP_NO_COMPRESSION;
 #endif
-	 
+	
 	/**
 	 * SSL_OP_TLS_BLOCK_PADDING_BUG:
 	 *
@@ -141,8 +141,14 @@ BOOL tls_connect(rdpTls* tls)
 	 */
 	options |= SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS;
 
+	//SSL_CTX_set_options(tls->ctx, options);
+	options |= SSL_OP_ALL;
+	
+	options |= SSL_OP_NO_SSLv2;
+	options |= SSL_OP_NO_SSLv3;
+	
 	SSL_CTX_set_options(tls->ctx, options);
-
+	
 	tls->ssl = SSL_new(tls->ctx);
 
 	if (tls->ssl == NULL)
